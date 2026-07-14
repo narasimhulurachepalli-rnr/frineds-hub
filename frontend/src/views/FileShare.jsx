@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import api from '../services/api';
 import Loader from '../components/Loader';
+import { getFileUrl } from '../utils/helpers';
 import { 
   HardDrive, Plus, Bookmark, FileText, 
   Download, Trash2, ShieldAlert, Sparkles, Filter
@@ -125,7 +126,7 @@ export const FileShare = () => {
   const handleDownload = async (id, url) => {
     try {
       await api.post(`/files/${id}/download`);
-      window.open(url, '_blank');
+      window.open(getFileUrl(url), '_blank');
       fetchFiles();
     } catch (error) {
       console.error('Increment download error:', error.message);

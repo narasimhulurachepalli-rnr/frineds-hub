@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import api from '../services/api';
 import Loader from '../components/Loader';
+import { getFileUrl } from '../utils/helpers';
 import { 
   FileText, Plus, BookOpen, Bookmark, 
   ExternalLink, Search, Download, Trash2, Award, ChevronDown, ChevronUp, Link as LinkIcon
@@ -184,7 +185,7 @@ export const StudyHub = () => {
   const handleDownload = async (id, url) => {
     try {
       await api.post(`/files/${id}/download`);
-      window.open(url, '_blank');
+      window.open(getFileUrl(url), '_blank');
       fetchMaterials();
     } catch (error) {
       console.error('Download increment error:', error.message);

@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import api from '../services/api';
 import Loader from '../components/Loader';
+import { getFileUrl } from '../utils/helpers';
 import { 
   Heart, MessageCircle, Download, Calendar as CalIcon, 
   Plus, X, Image as ImageIcon, Send, ArrowLeft, ArrowRight, Play
@@ -242,9 +243,9 @@ export const Memories = () => {
                 {/* Media frame */}
                 <div className="aspect-square bg-slate-950 flex items-center justify-center relative group">
                   {mem.type === 'video' ? (
-                    <video src={mem.url} controls className="w-full h-full object-cover" />
+                    <video src={getFileUrl(mem.url)} controls className="w-full h-full object-cover" />
                   ) : (
-                    <img src={mem.url} alt={mem.title} className="w-full h-full object-cover" />
+                    <img src={getFileUrl(mem.url)} alt={mem.title} className="w-full h-full object-cover" />
                   )}
                   
                   {/* Hover album name tag */}
@@ -291,7 +292,7 @@ export const Memories = () => {
 
                     <div className="flex items-center gap-1">
                       <a
-                        href={mem.url}
+                        href={getFileUrl(mem.url)}
                         download
                         className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors"
                         title="Download Memory"
@@ -419,7 +420,7 @@ export const Memories = () => {
           {/* Slide item */}
           <div className="flex-grow flex items-center justify-center max-w-4xl max-h-[80vh] w-full relative">
             <img
-              src={imagesOnlyForSlideshow[activeSlideIdx].url}
+              src={getFileUrl(imagesOnlyForSlideshow[activeSlideIdx].url)}
               alt={imagesOnlyForSlideshow[activeSlideIdx].title}
               className="max-w-full max-h-full object-contain rounded-xl shadow-2xl border border-white/5"
             />
@@ -456,7 +457,7 @@ export const Memories = () => {
             
             {/* Left Media frame (hidden on mobile to save space) */}
             <div className="hidden md:block md:w-1/2 bg-slate-950 border-r border-slate-900 relative">
-              <img src={showCommentModal.url} alt="Target comment" className="w-full h-full object-cover" />
+              <img src={getFileUrl(showCommentModal.url)} alt="Target comment" className="w-full h-full object-cover" />
             </div>
 
             {/* Right Comment details section */}
@@ -483,7 +484,7 @@ export const Memories = () => {
                   showCommentModal.comments?.map((comment) => (
                     <div key={comment._id} className="flex items-start gap-2 bg-slate-900/20 p-2 rounded-xl">
                       <img
-                        src={comment.user?.avatar || 'https://via.placeholder.com/150'}
+                        src={comment.user?.avatar ? getFileUrl(comment.user.avatar) : 'https://via.placeholder.com/150'}
                         alt={comment.user?.username}
                         className="h-6.5 w-6.5 rounded-full object-cover mt-0.5"
                       />
