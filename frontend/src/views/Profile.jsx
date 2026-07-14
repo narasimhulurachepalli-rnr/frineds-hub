@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import api from '../services/api';
 import Loader from '../components/Loader';
+import { getFileUrl } from '../utils/helpers';
 import { 
   User, Mail, Phone, Calendar as CalIcon, 
   Briefcase, GraduationCap, Github, Linkedin, 
@@ -183,7 +184,7 @@ export const Profile = () => {
         {/* Cover Image banner */}
         <div className="h-44 md:h-60 bg-slate-900 relative">
           {coverPreview ? (
-            <img src={coverPreview} alt="Cover Banner" className="w-full h-full object-cover" />
+            <img src={coverPreview.startsWith('blob:') ? coverPreview : getFileUrl(coverPreview)} alt="Cover Banner" className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-gradient-to-r from-slate-950 to-indigo-950 flex items-center justify-center">
               <span className="text-slate-700 text-xs font-bold uppercase tracking-wider">No Cover Image</span>
@@ -203,7 +204,7 @@ export const Profile = () => {
           <div className="flex flex-col md:flex-row items-center md:items-end gap-4 text-center md:text-left">
             <div className="relative h-32 w-32 md:h-36 md:w-36 rounded-3xl border-4 border-slate-950 bg-slate-900 shadow-2xl overflow-hidden">
               <img
-                src={avatarPreview || 'https://via.placeholder.com/150'}
+                src={avatarPreview ? (avatarPreview.startsWith('blob:') ? avatarPreview : getFileUrl(avatarPreview)) : 'https://via.placeholder.com/150'}
                 alt={user.username}
                 className="w-full h-full object-cover"
               />

@@ -4,6 +4,7 @@ import { useNotification } from '../context/NotificationContext';
 import { useTheme } from '../context/ThemeContext';
 import { Bell, Menu, X, Trash2, LogOut, Settings, User as UserIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getFileUrl } from '../utils/helpers';
 
 export const Navbar = ({ onMenuClick }) => {
   const { user, logout } = useAuth();
@@ -109,7 +110,7 @@ export const Navbar = ({ onMenuClick }) => {
                             }`}
                           >
                             <img
-                              src={notif.sender?.avatar || 'https://via.placeholder.com/150'}
+                              src={notif.sender?.avatar ? getFileUrl(notif.sender.avatar) : 'https://via.placeholder.com/150'}
                               alt="Uploader"
                               className="h-7 w-7 rounded-full object-cover mt-0.5 border border-slate-700"
                             />
@@ -142,7 +143,7 @@ export const Navbar = ({ onMenuClick }) => {
                 className="flex items-center gap-2.5 rounded-2xl border border-slate-800/60 p-1 pr-3 hover:bg-slate-900 transition-all"
               >
                 <img
-                  src={user.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'}
+                  src={user.avatar ? getFileUrl(user.avatar) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'}
                   alt="Profile"
                   className="h-8 w-8 rounded-xl object-cover border border-slate-700"
                 />

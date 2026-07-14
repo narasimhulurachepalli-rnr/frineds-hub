@@ -4,6 +4,7 @@ import { useSocket } from '../context/SocketContext';
 import { useTheme } from '../context/ThemeContext';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
+import { getFileUrl } from '../utils/helpers';
 import { 
   Sparkles, Sun, Cloud, CloudRain, Snowflake, Flame, 
   Users, Quote, Calendar as CalIcon, ArrowRight, Lightbulb, 
@@ -375,7 +376,7 @@ export const Dashboard = () => {
                     <div className="flex items-center gap-2.5">
                       <div className="relative">
                         <img
-                          src={usr.avatar || 'https://via.placeholder.com/150'}
+                          src={usr.avatar ? getFileUrl(usr.avatar) : 'https://via.placeholder.com/150'}
                           alt={usr.username}
                           className="h-8.5 w-8.5 rounded-xl object-cover border border-slate-800"
                         />

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { getFileUrl } from '../utils/helpers';
 import { 
   LayoutDashboard, MessageSquare, BookOpen, HardDrive, 
   Image, Sparkles, Gamepad2, FileText, Calendar, 
@@ -86,7 +87,7 @@ export const Sidebar = ({ isOpen, onClose }) => {
       {user && (
         <div className="mt-auto border-t border-slate-900 pt-4 flex items-center gap-3 px-1">
           <img
-            src={user.avatar || 'https://via.placeholder.com/150'}
+            src={user.avatar ? getFileUrl(user.avatar) : 'https://via.placeholder.com/150'}
             alt="Pfp"
             className="h-9 w-9 rounded-xl object-cover border border-slate-800"
           />
